@@ -20,7 +20,6 @@ import resource.exception.AppException;
 
 @Path("doctor")
 @Produces( value= { MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
-@Consumes(MediaType.APPLICATION_JSON)
 public class DoctorResource {
 	
 	private DoctorController dc = new DoctorController();
@@ -58,7 +57,7 @@ public class DoctorResource {
 		Doctor doctor= dc.getbyId(doctorfilter.getId());
 		
 		if(doctor == null) {
-			throw new AppException("Data Not Found", 404);
+			throw new AppException("Data not found", 404);
 		}
 		
 		return Response.ok()
@@ -85,16 +84,15 @@ public class DoctorResource {
 		
 		
 		if(doctor == null) {
-			throw new AppException("Data Not Found", 404);
+			throw new AppException("Data not found", 404);
 		}
 		
-		System.out.println(doctor.getId());
 		doctor.setCode(docbody.getCode());
 		doctor.setFirstname(docbody.getFirstname());
 		doctor.setLastname(docbody.getLastname());
 		doctor.setGrade(docbody.getGrade());
 		
-		doctor = dc.update(doctorfilter.getId(), doctor);
+		doctor = dc.update(doctor);
 		
 		return Response.ok()
 			       .entity(doctor)
@@ -107,7 +105,7 @@ public class DoctorResource {
 		Doctor doctor= dc.getbyId(doctorfilter.getId());
 		
 		if(doctor == null) {
-			throw new AppException("Data Not Found", 404);
+			throw new AppException("Data not found", 404);
 		}
 		
 		dc.delete(doctor);

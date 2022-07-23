@@ -7,44 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import entity.Doctor;
+import entity.Patient;
 import util.HibernateUtil;
 
-public class DoctorController {
+public class PatientController {
 	
-	public String test() {
+	public Patient getbyId(Integer id) {
 		Session session = null;
-		String result = "";
+		Patient patient = null;
 		
 		try {
 			
 			session = HibernateUtil.getSessionFactory().openSession();
-			Object res = session.createNativeQuery("select version()").getSingleResult();
-			System.out.println("result => "+ res);
-			result = "result => "+ res;
-		
-			
-		}catch(Throwable t) {
-			t.printStackTrace();
-		}
-		
-		finally{
-			if(session != null) {
-				session.close();
-			}
-		}
-		return result;
-	}
-	
-	public Doctor getbyId(Integer id) {
-		Doctor doctor = null;
-		Session session = null;
-		
-		
-		try {
-			
-			session = HibernateUtil.getSessionFactory().openSession();
-			doctor = session.get(Doctor.class, id);
+			patient = session.get(Patient.class, id);
 			
 		}catch(Throwable t) {
 			t.printStackTrace();
@@ -56,19 +31,18 @@ public class DoctorController {
 			}
 		}
 		
-		return doctor;
+		return patient;
 	}
 	
-	
-	public List<Doctor> getAll() {
+	public List<Patient> getAll() {
 		Session session = null;
-		List<Doctor> doctors = new ArrayList<Doctor>();
+		List<Patient> patients = new ArrayList<Patient>();
 		
 		try {
 			 session = HibernateUtil.getSessionFactory().openSession();
-			 Query<Doctor> query = session.createQuery("SELECT a FROM Doctor a", Doctor.class);
+			 Query<Patient> query = session.createQuery("SELECT a FROM Patient a", Patient.class);
 			 
-			 doctors = query.getResultList();
+			 patients = query.getResultList();
 		}catch(Throwable t) {
 			t.printStackTrace();
 		}
@@ -79,10 +53,10 @@ public class DoctorController {
 			}
 		}
 		
-		return doctors;
+		return patients;
 	}
 	
-	public Doctor create(Doctor doctor) {
+	public Patient create(Patient patient) {
 		
 		Session session = null;
 		Transaction tx = null;
@@ -90,7 +64,7 @@ public class DoctorController {
 			session = HibernateUtil.getSessionFactory().openSession();
 			tx = session.beginTransaction();
 			
-			session.save(doctor);
+			session.save(patient);
 			session.flush();
 			
 			tx.commit();
@@ -104,17 +78,17 @@ public class DoctorController {
 			}
 		}
 		
-		return doctor;
+		return patient;
 	}
 	
-	public Doctor update(Doctor doctor) {
+	public Patient update(Patient patient) {
 		Session session = null;
 		Transaction tx = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			tx = session.beginTransaction();
 			
-			session.update(doctor);
+			session.update(patient);
 			
 			tx.commit();
 		}catch(Exception e) {
@@ -126,16 +100,16 @@ public class DoctorController {
 				session.close();
 			}
 		}
-		return doctor;
+		return patient;
 	}
 	
-	public void delete(Doctor doctor) {
+	public void delete(Patient patient) {
 		Session session = null;
 		Transaction tx = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			tx = session.beginTransaction();
-			session.delete(doctor);
+			session.delete(patient);
 			
 			tx.commit();
 		}catch(Exception e) {
@@ -149,4 +123,5 @@ public class DoctorController {
 		}
 		
 	}
+	
 }
