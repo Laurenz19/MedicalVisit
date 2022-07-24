@@ -13,5 +13,13 @@
       <property name="firstname" column="firstname" type="string"/>
       <property name="lastname" column="lastname" type="string"/>
       <property name="grade" column="grade" type="string"/>
+      
+      <set name="visits" table="visit" inverse="true" cascade="all" lazy="true" fetch="select">
+            <key>
+                <column name="doctor_id" not-null="true" />
+            </key>
+            <one-to-many class="entity.Visit" />
+      </set>
+      
    </class>
 </hibernate-mapping>

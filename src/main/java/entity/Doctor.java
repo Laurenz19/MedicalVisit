@@ -1,14 +1,35 @@
 package entity;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
+
+
 @Entity
-public class Doctor {
+public class Doctor implements Serializable  {
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5193089857738219065L;
 	private Integer id;
 	private String code;
 	private String firstname;
 	private String lastname;
 	private String grade;
+	
+	@JsonbTransient
+	@XmlTransient
+	private Set<Visit> visits;
+	
+	public void addVisit(Visit visit) {
+		this.visits.add(visit);
+	}
 	
 	public Integer getId() {
 		return id;
@@ -46,4 +67,14 @@ public class Doctor {
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+	public Set<Visit> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Set<Visit> visits) {
+		this.visits = visits;
+	}
+	
+	
 }

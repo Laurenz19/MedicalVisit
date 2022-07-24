@@ -1,16 +1,19 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import entity.Doctor;
+import entity.Visit;
 import util.HibernateUtil;
 
-public class DoctorController {
+public class DoctorController  {
 	
 	public String test() {
 		Session session = null;
@@ -45,6 +48,12 @@ public class DoctorController {
 			
 			session = HibernateUtil.getSessionFactory().openSession();
 			doctor = session.get(Doctor.class, id);
+			
+			 Set<Visit> visits = doctor.getVisits();
+	         for (Iterator<Visit> iterator2 = visits.iterator(); iterator2.hasNext();){
+	             Visit visit = (Visit) iterator2.next(); 
+	             System.out.println("Visit: " + visit.getDate()); 
+	          }
 			
 		}catch(Throwable t) {
 			t.printStackTrace();

@@ -48,7 +48,7 @@ public class PatientResource {
 		}
 		
 		return Response.status(200)
-				.entity("Test worked")
+				.entity(patient)
 				.build();
 	}
 	
@@ -57,7 +57,7 @@ public class PatientResource {
 	public Response createPatient(Patient patient) {
 		patient = pc.create(patient);
 		
-		return Response.status(200)
+		return Response.status(201)
 				.entity(patient)
 				.build();
 	}

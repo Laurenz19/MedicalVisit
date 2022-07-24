@@ -6,7 +6,7 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/db_test</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/db_test1</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
 
@@ -24,7 +24,7 @@
 		    org.hibernate.cache.NoCacheProvider
 		</property>
 
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
 
 
 		<!-- Entities to map -->

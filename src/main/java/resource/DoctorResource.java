@@ -28,9 +28,9 @@ public class DoctorResource {
 	@Path("/test")
 	public Response test() {
 		String result = dc.test();
-		if(result != "") {
-			throw new AppException("Exception work perfectly", 404);
-		}
+//		if(result != "") {
+//			throw new AppException("Exception work perfectly", 404);
+//		}
 		
 		return Response.ok()
 			       .entity(result)
