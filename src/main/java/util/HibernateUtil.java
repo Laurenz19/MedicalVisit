@@ -15,6 +15,7 @@ public class HibernateUtil {
     		/****************************************************/
     			cfg.addResource("entity/Doctor.hbm.xml");
     			cfg.addResource("entity/Patient.hbm.xml");
+    			cfg.addResource("entity/Visit.hbm.xml");
     		/****************************************************/
     			
     		StandardServiceRegistry ssRegistry = new StandardServiceRegistryBuilder()
